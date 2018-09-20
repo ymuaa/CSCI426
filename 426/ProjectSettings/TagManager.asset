@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mirrors
   - Receiver
+  - Rope
   layers:
   - Default
   - TransparentFX
