@@ -53,20 +53,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Line.cs" />
-     <Compile Include="Assets\TouchMove.cs" />
-     <Compile Include="Assets\ttw.cs" />
+     <Compile Include="Assets\Scripts\DropSphere.cs" />
+     <Compile Include="Assets\Scripts\moveSphere.cs" />
+     <Compile Include="Assets\Scripts\TouchMove.cs" />
+     <Compile Include="Assets\Scripts\ttw.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>C:/Users/Felix/Downloads/csci526-master/426/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Felix/Documents/GitHub/CSCI426/426/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Felix/Downloads/csci526-master/426/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/Felix/Documents/GitHub/CSCI426/426/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Felix/Downloads/csci526-master/426/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Felix/Documents/GitHub/CSCI426/426/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Felix/Downloads/csci526-master/426/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/Felix/Documents/GitHub/CSCI426/426/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
