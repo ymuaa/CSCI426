@@ -18,7 +18,7 @@
      void Start()
      {
          reader.SetVertexCount(2);//设置顶点
-         reader.SetWidth(0.3f, 0.3f); //设置开始和结束的宽
+         reader.SetWidth(0.1f, 0.1f); //设置开始和结束的宽
          reader.SetColors(Color.red, Color.yellow); //设置开始和结束的颜色
          reader.SetPosition(0, transform.position);//设置开始坐标
      }
@@ -41,10 +41,6 @@
              		if (hit.collider.tag == "Receiver") {
              			print("you win!");
              		}
-                    if (hit.collider.tag == "filter")
-                    {
-                        reader.SetWidth(0.2f, 0.2f);
-                    }
 
              	}
              }
