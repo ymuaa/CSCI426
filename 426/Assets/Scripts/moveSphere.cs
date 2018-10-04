@@ -17,9 +17,8 @@ public Rigidbody rb;
     {
     	if(moving){
     		rb.useGravity = true;
-    		print("move!!");
-            
-            }
+    		//print("move!!");
+        }
 
         
     }

@@ -10,6 +10,8 @@
       public GameObject EndPoint;
       Vector3  direcction = new Vector3(1.0f, -1.0f, 0.0f);
       public int currentPoint=0 ;
+      public Color c1 = Color.white;
+    public Color c2 = new Color(1, 1, 1, 0);
       void Awake()
      {
          reader = GetComponent<LineRenderer>();
@@ -20,7 +22,7 @@
      {
          reader.SetVertexCount(2);//设置顶点
          reader.SetWidth(0.1f, 0.1f); //设置开始和结束的宽
-         reader.SetColors(Color.red, Color.red); //设置开始和结束的颜色
+         reader.SetColors(c1, c2); //设置开始和结束的颜色
          reader.SetPosition(0, transform.position);//设置开始坐标
      }
 
