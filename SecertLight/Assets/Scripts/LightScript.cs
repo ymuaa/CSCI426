@@ -8,10 +8,22 @@ public class LightScript : MonoBehaviour {
     public GameObject GameManager;
     private bool istriggered = false;
     public GameObject copy;
+    public string currentColor;
+    public SpriteRenderer sr;
+    
+
+    //Color Sellection
+    public Color colorBlue;
+    public Color colorYellow;
+    public Color colorPink;
+    public Color colorPurple;
 
     // Use this for initialization
     void Start () {
 		_cubeTransform = gameObject.GetComponent<Transform>();
+
+        //set color
+        SetRandomColor();
 	}
 	
 	// Update is called once per frame
@@ -134,8 +146,34 @@ public class LightScript : MonoBehaviour {
                 Debug.Log(direction);
                 istriggered = true;
                 GetComponent<BoxCollider2D>().enabled = false;
-            }
-            
+            } 
+        }
+
+        //color checker
+        Debug.Log(collider.tag);
+        if (collider.tag != currentColor) {
+            Debug.Log("Game Over!!!!!!!!!!!!!!!!!");
+        }
+
+        //color changer
+        if (collider.tag == "BlueChanger") {
+            sr.color = colorBlue;
+            Destroy(collider.gameObject);
+        }
+        if (collider.tag == "PinkChanger")
+        {
+            sr.color = colorPink;
+            Destroy(collider.gameObject);
+        }
+        if (collider.tag == "YellowChanger")
+        {
+            sr.color = colorYellow;
+            //Destroy(collider.gameObject);
+        }
+        if (collider.tag == "PurpleChanger")
+        {
+            sr.color = colorPurple;
+            //Destroy(collider.gameObject);
         }
     }
 
@@ -146,4 +184,25 @@ public class LightScript : MonoBehaviour {
     }
 
 
+    void SetRandomColor() {
+        int index = Random.Range(0, 4);
+        switch(index) {
+            case 0:
+                currentColor = "Blue";
+                sr.color = colorBlue;
+                break;
+            case 1:
+                currentColor = "Yellow";
+                sr.color = colorYellow;
+                break;
+            case 2:
+                currentColor = "Pink";
+                sr.color = colorPink;
+                break;
+            case 3:
+                currentColor = "Purplr";
+                sr.color = colorPurple;
+                break;
+        }
+    }
 }
