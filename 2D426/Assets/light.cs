@@ -34,5 +34,10 @@ public class light : MonoBehaviour {
             gameObject.SetActive(false);
             Debug.Log("trigger");
         }
+        if (this.enabled)
+        {
+            this.enabled = false;
+            //This will fire only the first time this object hits a trigger
+        }
     }
 }
