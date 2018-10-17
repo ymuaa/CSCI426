@@ -10,6 +10,7 @@ public class LightScript : MonoBehaviour {
     public GameObject copy;
     public string currentColor;
     public SpriteRenderer sr;
+    public int speed = 1;
     
 
     //Color Sellection
@@ -28,7 +29,7 @@ public class LightScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(direction);
+        //Debug.Log(direction);
         /*if(Input.GetKey(KeyCode.W))
 		{
 			_cubeTransform.Translate(Vector3.up * 1f*Time.deltaTime,Space.Self);
@@ -47,36 +48,36 @@ public class LightScript : MonoBehaviour {
 		}*/
         if (direction == 0.5)
         {
-            _cubeTransform.Translate((Vector3.up + Vector3.left).normalized * 1f * Time.deltaTime, Space.Self);
+            _cubeTransform.Translate((Vector3.up + Vector3.left).normalized * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==1)
 		{
-			_cubeTransform.Translate(Vector3.up * 1f*Time.deltaTime,Space.Self);
+			_cubeTransform.Translate(Vector3.up * speed * Time.deltaTime,Space.Self);
 		}
         if (direction == 1.5)
         {
-            _cubeTransform.Translate(((Vector3.up + Vector3.right).normalized) * 1f * Time.deltaTime, Space.Self);
+            _cubeTransform.Translate(((Vector3.up + Vector3.right).normalized) * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==2)
 		{
-   			_cubeTransform.Translate(Vector3.right * 1f * Time.deltaTime, Space.Self);
+   			_cubeTransform.Translate(Vector3.right * speed * Time.deltaTime, Space.Self);
 		}
         if (direction == 2.5)
         {
-            _cubeTransform.Translate(((Vector3.down + Vector3.right).normalized) * 1f * Time.deltaTime, Space.Self);
+            _cubeTransform.Translate(((Vector3.down + Vector3.right).normalized) * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==3)
 		{
-            print("ok!");
-   			_cubeTransform.Translate(Vector3.down * 1f * Time.deltaTime, Space.Self);
+            
+   			_cubeTransform.Translate(Vector3.down * speed * Time.deltaTime, Space.Self);
 		}
         if (direction == 3.5)
         {
-            _cubeTransform.Translate((Vector3.down + Vector3.left).normalized * 1f * Time.deltaTime, Space.Self);
+            _cubeTransform.Translate((Vector3.down + Vector3.left).normalized * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==4)
 		{
-			_cubeTransform.Translate(Vector3.left * 1f * Time.deltaTime, Space.Self);
+			_cubeTransform.Translate(Vector3.left * speed * Time.deltaTime, Space.Self);
 		}
 		
 	}
@@ -123,37 +124,61 @@ public class LightScript : MonoBehaviour {
             GameManager.GetComponent<gameManager>().GameWin();
         }
 
+        if (aaa.gameObject.tag == "Wall")
+        {
+            print(gameObject.name);
+            Destroy(gameObject);
+            GameManager.GetComponent<gameManager>().GameObjectCounter--;
+            if(GameManager.GetComponent<gameManager>().GameObjectCounter<=0){
+                GameManager.GetComponent<gameManager>().GameOver();
+            }
+            
+        }
+
 
         
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Prism")
+        if (collider.tag == "Prism" || collider.tag == "Prism2")
         {
             if (istriggered == false)
             {
                 // do your things here that has to happen once
                 GameObject new1 = Instantiate(gameObject);
-                double newDirection = direction + 0.5;
-                if (newDirection == 4.5)
-                    newDirection = 0.5;
+
+                //hard code color
+                GetComponent<SpriteRenderer>().color = colorPink;
+
+                double newDirection;
+                if (collider.tag == "Prism") {
+                    newDirection = direction + 1;
+                } else {
+                    newDirection = direction - 1;
+                }
+
+                if (newDirection > 4)
+                    newDirection -= 4;
                 new1.GetComponent<LightScript>().direction = newDirection;
-                Debug.Log(newDirection);
-                direction -= 0.5;
-                if (direction == 0)
-                    direction = 4;
-                Debug.Log(direction);
+                //Debug.Log(newDirection);
+
+                //direction -= 0.5;
+                //if (direction == 0)
+                    //direction = 4;
+
+                //Debug.Log(direction);
                 istriggered = true;
-                GetComponent<BoxCollider2D>().enabled = false;
+                //GetComponent<BoxCollider2D>().enabled = false;
+                GameManager.GetComponent<gameManager>().GameObjectCounter++;
             } 
         }
 
         //color checker
-        Debug.Log(collider.tag);
-        if (collider.tag != currentColor) {
-            Debug.Log("Game Over!!!!!!!!!!!!!!!!!");
-        }
+        //Debug.Log(collider.tag);
+        //if (collider.tag != currentColor && (collider.tag == "Blue" || collider.tag == "Yellow" || collider.tag == "Pink"|| collider.tag == "Purple")) {
+        //    GameManager.GetComponent<gameManager>().GameOver();
+        //}
 
         //color changer
         if (collider.tag == "BlueChanger") {
@@ -168,17 +193,27 @@ public class LightScript : MonoBehaviour {
         if (collider.tag == "YellowChanger")
         {
             sr.color = colorYellow;
-            //Destroy(collider.gameObject);
+            Destroy(collider.gameObject);
         }
         if (collider.tag == "PurpleChanger")
         {
             sr.color = colorPurple;
-            //Destroy(collider.gameObject);
+            Destroy(collider.gameObject);
         }
+        if (collider.tag == "MirrorTrigger")
+        {
+            //collider.gameObject.GetComponent<MirrorTrigger>().Mirror.transform.Rotate(0, 0, 90);
+            collider.gameObject.GetComponent<MirrorTrigger>().Mirror.GetComponent<Mirror>().Rotate();
+            
+            Destroy(collider.gameObject);
+        }
+
+
     }
 
     void OnTriggerExit(Collider coll)
     {
+        print("Exit");
         istriggered = false;
         GetComponent<BoxCollider2D>().enabled = true;
     }
@@ -186,6 +221,7 @@ public class LightScript : MonoBehaviour {
 
     void SetRandomColor() {
         int index = Random.Range(0, 4);
+        index = 2;
         switch(index) {
             case 0:
                 currentColor = "Blue";

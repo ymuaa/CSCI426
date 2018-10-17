@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\FollowPlayer.cs" />
     <Compile Include="Assets\gameManager.cs" />
+    <Compile Include="Assets\MirrorTrigger.cs" />
     <Compile Include="Assets\RestartLevel.cs" />
     <Compile Include="Assets\Rotator.cs" />
     <Compile Include="Assets\Scripts\get.cs" />

@@ -15,6 +15,9 @@ TagManager:
   - PinkChanger
   - YellowChanger
   - PurpleChanger
+  - Wall
+  - MirrorTrigger
+  - Prism2
   layers:
   - Default
   - TransparentFX
