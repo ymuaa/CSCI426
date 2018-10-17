@@ -17,7 +17,10 @@ TagManager:
   - PurpleChanger
   - Wall
   - MirrorTrigger
+<<<<<<< HEAD
   - Prism2
+=======
+>>>>>>> c6374199e84ba704af34d2177c3b5895a5e60130
   layers:
   - Default
   - TransparentFX

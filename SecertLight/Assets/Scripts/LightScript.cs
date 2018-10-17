@@ -69,7 +69,11 @@ public class LightScript : MonoBehaviour {
         if (direction ==3)
 		{
             
+<<<<<<< HEAD
    			_cubeTransform.Translate(Vector3.down * speed * Time.deltaTime, Space.Self);
+=======
+   			_cubeTransform.Translate(Vector3.down * 1f * Time.deltaTime, Space.Self);
+>>>>>>> c6374199e84ba704af34d2177c3b5895a5e60130
 		}
         if (direction == 3.5)
         {
@@ -162,11 +166,17 @@ public class LightScript : MonoBehaviour {
                     newDirection -= 4;
                 new1.GetComponent<LightScript>().direction = newDirection;
                 //Debug.Log(newDirection);
+<<<<<<< HEAD
 
                 //direction -= 0.5;
                 //if (direction == 0)
                     //direction = 4;
 
+=======
+                direction -= 0.5;
+                if (direction == 0)
+                    direction = 4;
+>>>>>>> c6374199e84ba704af34d2177c3b5895a5e60130
                 //Debug.Log(direction);
                 istriggered = true;
                 //GetComponent<BoxCollider2D>().enabled = false;
@@ -176,9 +186,15 @@ public class LightScript : MonoBehaviour {
 
         //color checker
         //Debug.Log(collider.tag);
+<<<<<<< HEAD
         //if (collider.tag != currentColor && (collider.tag == "Blue" || collider.tag == "Yellow" || collider.tag == "Pink"|| collider.tag == "Purple")) {
         //    GameManager.GetComponent<gameManager>().GameOver();
         //}
+=======
+        if (collider.tag != currentColor && (collider.tag == "Blue" || collider.tag == "Yellow" || collider.tag == "Pink"|| collider.tag == "Purple")) {
+            GameManager.GetComponent<gameManager>().GameOver();
+        }
+>>>>>>> c6374199e84ba704af34d2177c3b5895a5e60130
 
         //color changer
         if (collider.tag == "BlueChanger") {
