@@ -16,6 +16,7 @@ TagManager:
   - YellowChanger
   - PurpleChanger
   - Wall
+  - MirrorTrigger
   layers:
   - Default
   - TransparentFX

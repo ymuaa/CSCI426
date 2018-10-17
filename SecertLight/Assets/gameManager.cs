@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour {
 	public Button Restart;
 	public Button Home;
 	public Button NextLevel;
+	public int GameObjectCounter;
 
 	public int EnergyLevel
 	{
@@ -30,6 +31,7 @@ public class gameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		EnergyLevel =1;
+		GameObjectCounter=1;
 	}
 	
 	// Update is called once per frame

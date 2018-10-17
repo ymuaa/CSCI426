@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mirror : MonoBehaviour {
 	public int state=0;
+	public bool clickable=true;
 
 	// Use this for initialization
 	void Start () {
@@ -12,7 +13,8 @@ public class Mirror : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnMouseDown(){
-		transform.Rotate(0, 0, 90);
+		if(clickable){
+			transform.Rotate(0, 0, 90);
 		if(state==1){
 			state=0;
 		}
@@ -20,6 +22,19 @@ public class Mirror : MonoBehaviour {
 			state =1;
 		}
 		
-		print("ok");
+		}
+		
+		
+	}
+
+	public void Rotate(){
+
+		transform.Rotate(0, 0, 90);
+		if(state==1){
+			state=0;
+		}
+		else{
+			state =1;
+		}
 	}
 }
