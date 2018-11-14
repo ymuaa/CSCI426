@@ -6,6 +6,18 @@ TagManager:
   tags:
   - Mirror
   - Goal
+  - Prism
+  - Blue
+  - Yellow
+  - Pink
+  - Purple
+  - BlueChanger
+  - PinkChanger
+  - YellowChanger
+  - PurpleChanger
+  - Wall
+  - MirrorTrigger
+  - Prism2
   layers:
   - Default
   - TransparentFX
@@ -42,4 +54,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: wheel
+    uniqueID: 4195280263
     locked: 0
