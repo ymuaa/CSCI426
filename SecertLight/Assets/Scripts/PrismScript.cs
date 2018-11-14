@@ -15,11 +15,11 @@ public class PrismScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        GetComponent<BoxCollider2D>().enabled = false;
+        //GetComponent<BoxCollider2D>().enabled = false;
     }
 
     void OnTriggerExit(Collider coll)
     {
-        GetComponent<BoxCollider2D>().enabled = true;
+        //GetComponent<BoxCollider2D>().enabled = true;
     }
 }

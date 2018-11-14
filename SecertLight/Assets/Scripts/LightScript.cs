@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LightScript : MonoBehaviour {
-	Transform _cubeTransform;
-	double direction = 2;
+    Transform _parentTransform;
+    double direction = 2;
     public GameObject GameManager;
     private bool istriggered = false;
     public GameObject copy;
     public string currentColor;
     public SpriteRenderer sr;
     public int speed = 1;
-    
+    GameObject new1;
+
 
     //Color Sellection
     public Color colorBlue;
@@ -21,7 +22,7 @@ public class LightScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		_cubeTransform = gameObject.GetComponent<Transform>();
+        _parentTransform = gameObject.transform.parent.gameObject.GetComponent<Transform>();
 
         //set color
         SetRandomColor();
@@ -48,108 +49,115 @@ public class LightScript : MonoBehaviour {
 		}*/
         if (direction == 0.5)
         {
-            _cubeTransform.Translate((Vector3.up + Vector3.left).normalized * speed * Time.deltaTime, Space.Self);
+            _parentTransform.Translate((Vector3.up + Vector3.left).normalized * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==1)
 		{
-			_cubeTransform.Translate(Vector3.up * speed * Time.deltaTime,Space.Self);
-		}
+            _parentTransform.Translate(Vector3.up * speed * Time.deltaTime,Space.Self);
+        }
         if (direction == 1.5)
         {
-            _cubeTransform.Translate(((Vector3.up + Vector3.right).normalized) * speed * Time.deltaTime, Space.Self);
+            _parentTransform.Translate(((Vector3.up + Vector3.right).normalized) * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==2)
 		{
-   			_cubeTransform.Translate(Vector3.right * speed * Time.deltaTime, Space.Self);
-		}
+            _parentTransform.Translate(Vector3.right * speed * Time.deltaTime, Space.Self);
+        }
         if (direction == 2.5)
         {
-            _cubeTransform.Translate(((Vector3.down + Vector3.right).normalized) * speed * Time.deltaTime, Space.Self);
+            _parentTransform.Translate(((Vector3.down + Vector3.right).normalized) * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==3)
 		{
-            
-   			_cubeTransform.Translate(Vector3.down * speed * Time.deltaTime, Space.Self);
+            _parentTransform.Translate(Vector3.down * speed * Time.deltaTime, Space.Self);
 		}
         if (direction == 3.5)
         {
-            _cubeTransform.Translate((Vector3.down + Vector3.left).normalized * speed * Time.deltaTime, Space.Self);
+            _parentTransform.Translate((Vector3.down + Vector3.left).normalized * speed * Time.deltaTime, Space.Self);
         }
         if (direction ==4)
 		{
-			_cubeTransform.Translate(Vector3.left * speed * Time.deltaTime, Space.Self);
-		}
+            _parentTransform.Translate(Vector3.left * speed * Time.deltaTime, Space.Self);
+        }
 		
 	}
 
-	void OnCollisionEnter2D(Collision2D aaa) //aaa為自定義碰撞事件
-    {    
-    	if (aaa.gameObject.tag == "Mirror") //如果aaa碰撞事件的物件名稱是CubeA
-        {   
-        	if(aaa.gameObject.GetComponent<Mirror>().state==0){
-        		if(direction ==2){
-        			direction =1;
-        		}
-        		else if(direction ==1){
-        			direction =2;
-        		}
-        		else if(direction ==4){
-        			direction =3;
-        		}
-        		else if(direction ==3){
-        			direction =4;
-        		}
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Mirror") //如果aaa碰撞事件的物件名稱是CubeA
+        {
+            if (collider.gameObject.GetComponent<Mirror>().state == 0)
+            {
+                if (direction == 2)
+                {
+                    direction = 1;
+                }
+                else if (direction == 1)
+                {
+                    direction = 2;
+                }
+                else if (direction == 4)
+                {
+                    direction = 3;
+                }
+                else if (direction == 3)
+                {
+                    direction = 4;
+                }
 
             }
-        	if(aaa.gameObject.GetComponent<Mirror>().state==1){
-        		if(direction ==3){
-        			direction =2;
-        		}
-        		else if(direction ==2){
-        			direction =3;
-        		}
-        		else if(direction ==1){
-        			direction =4;
-        		}
-        		else if(direction ==4){
-        			direction =1;
-        		}
+            if (collider.gameObject.GetComponent<Mirror>().state == 1)
+            {
+                if (direction == 3)
+                {
+                    direction = 2;
+                }
+                else if (direction == 2)
+                {
+                    direction = 3;
+                }
+                else if (direction == 1)
+                {
+                    direction = 4;
+                }
+                else if (direction == 4)
+                {
+                    direction = 1;
+                }
 
             }
-            
+
         }
 
-        if (aaa.gameObject.tag == "Goal") {
-        	Destroy(gameObject);
+        if (collider.gameObject.tag == "Goal")
+        {
+            Destroy(gameObject);
             GameManager.GetComponent<gameManager>().GameWin();
         }
 
-        if (aaa.gameObject.tag == "Wall")
+        if (collider.gameObject.tag == "Wall")
         {
             print(gameObject.name);
             Destroy(gameObject);
             GameManager.GetComponent<gameManager>().GameObjectCounter--;
-            if(GameManager.GetComponent<gameManager>().GameObjectCounter<=0){
+            if (GameManager.GetComponent<gameManager>().GameObjectCounter <= 0)
+            {
                 GameManager.GetComponent<gameManager>().GameOver();
             }
-            
+
         }
 
-
-        
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
         if (collider.tag == "Prism" || collider.tag == "Prism2")
         {
             if (istriggered == false)
             {
                 // do your things here that has to happen once
-                GameObject new1 = Instantiate(gameObject);
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                new1 = Instantiate(gameObject.transform.parent.gameObject);
 
                 //hard code color
-                GetComponent<SpriteRenderer>().color = colorPink;
+                new1.GetComponent<SpriteRenderer>().color = colorPink;
 
                 double newDirection;
                 if (collider.tag == "Prism") {
@@ -160,7 +168,7 @@ public class LightScript : MonoBehaviour {
 
                 if (newDirection > 4)
                     newDirection -= 4;
-                new1.GetComponent<LightScript>().direction = newDirection;
+                new1.transform.GetChild(0).GetComponent<LightScript>().direction = newDirection;
                 //Debug.Log(newDirection);
 
                 //direction -= 0.5;
@@ -169,7 +177,7 @@ public class LightScript : MonoBehaviour {
 
                 //Debug.Log(direction);
                 istriggered = true;
-                //GetComponent<BoxCollider2D>().enabled = false;
+                gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 GameManager.GetComponent<gameManager>().GameObjectCounter++;
             } 
         }
@@ -211,11 +219,11 @@ public class LightScript : MonoBehaviour {
 
     }
 
-    void OnTriggerExit(Collider coll)
+    void OnTriggerExit2D(Collider2D collider)
     {
         print("Exit");
         istriggered = false;
-        GetComponent<BoxCollider2D>().enabled = true;
+        new1.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 
 
