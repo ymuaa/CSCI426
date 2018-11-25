@@ -30,6 +30,8 @@ public class LightScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+    
+
         //Debug.Log(direction);
         /*if(Input.GetKey(KeyCode.W))
 		{
@@ -79,8 +81,31 @@ public class LightScript : MonoBehaviour {
 		{
             _parentTransform.Translate(Vector3.left * speed * Time.deltaTime, Space.Self);
         }
-		
-	}
+
+        //keep all color same
+        if (sr.color == colorPink)
+        {
+            //new1.GetComponent<Renderer>().material.color = colorPink;
+            new1.GetComponent<SpriteRenderer>().color = colorPink;
+        }
+        else if (sr.color == colorBlue)
+        {
+            //new1.GetComponent<Renderer>().material.color = colorBlue;
+            new1.GetComponent<SpriteRenderer>().color = colorBlue;
+        }
+        else if (sr.color == colorPurple)
+        {
+            //new1.GetComponent<Renderer>().material.color = colorPurple;
+            new1.GetComponent<SpriteRenderer>().color = colorPurple;
+        }
+        else
+        {
+            //new1.GetComponent<Renderer>().material.color = colorYellow;
+            new1.GetComponent<SpriteRenderer>().color = colorYellow;
+        }
+
+
+    }
 
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -155,9 +180,23 @@ public class LightScript : MonoBehaviour {
                 // do your things here that has to happen once
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 new1 = Instantiate(gameObject.transform.parent.gameObject);
+                SpriteRenderer new1SRender = new1.GetComponent<SpriteRenderer>();
 
-                //hard code color
-                new1.GetComponent<SpriteRenderer>().color = colorPink;
+                //keep all color same
+                if(sr.color == colorPink) {
+                    new1SRender.color = colorPink;
+                    //new1.GetComponent<Renderer>().material.color = colorPink;
+                } else if (sr.color == colorBlue) {
+                    new1SRender.color = colorBlue;
+                } else if (sr.color == colorPurple) {
+                    new1SRender.color = colorPurple;
+                } else {
+                    new1SRender.color = colorYellow;
+                }
+                Debug.Log("sr.color: " + sr.color);
+                Debug.Log("new1: " + new1.GetComponent<SpriteRenderer>().color);
+
+
 
                 double newDirection;
                 if (collider.tag == "Prism") {
@@ -183,29 +222,37 @@ public class LightScript : MonoBehaviour {
         }
 
         //color checker
-        //Debug.Log(collider.tag);
-        //if (collider.tag != currentColor && (collider.tag == "Blue" || collider.tag == "Yellow" || collider.tag == "Pink"|| collider.tag == "Purple")) {
-        //    GameManager.GetComponent<gameManager>().GameOver();
-        //}
+        Debug.Log(collider.tag);
+        if (collider.tag != currentColor && (collider.tag == "Blue" || collider.tag == "Yellow" || collider.tag == "Pink"|| collider.tag == "Purple")) {
+            GameManager.GetComponent<gameManager>().GameOver();
+        }
 
         //color changer
         if (collider.tag == "BlueChanger") {
             sr.color = colorBlue;
+            currentColor = "Blue";
+            //r.material.color = colorBlue;
             Destroy(collider.gameObject);
         }
         if (collider.tag == "PinkChanger")
         {
             sr.color = colorPink;
+            currentColor = "Pink";
+            //r.material.color = colorPink;
             Destroy(collider.gameObject);
         }
         if (collider.tag == "YellowChanger")
         {
             sr.color = colorYellow;
+            currentColor = "Yellow";
+            //r.material.color = colorYellow;
             Destroy(collider.gameObject);
         }
         if (collider.tag == "PurpleChanger")
         {
             sr.color = colorPurple;
+            currentColor = "Purple";
+            //r.material.color = colorPurple;
             Destroy(collider.gameObject);
         }
         if (collider.tag == "MirrorTrigger")
@@ -229,7 +276,7 @@ public class LightScript : MonoBehaviour {
 
     void SetRandomColor() {
         int index = Random.Range(0, 4);
-        index = 2;
+        //sindex = 0;
         switch(index) {
             case 0:
                 currentColor = "Blue";
